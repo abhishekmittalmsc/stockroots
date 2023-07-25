@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
-import AppBar from '@mui/material/AppBar';
+import Avatar from "@mui/material/Avatar";
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
@@ -38,6 +38,7 @@ const userDetails = async () => {
     const response = await axios.post("http://localhost:5000/api/userDetails", { token });
     const data = response.data;
     await setUserData(data);
+    console.log('user data', data)
   } catch (error) {
     // Handle error
     console.log(error);
@@ -46,22 +47,28 @@ const userDetails = async () => {
 
   const listItemClicked = (text) => {
     setSelectedItem(text);
+    if(text==='Logout'){
+      localStorage.removeItem('token')
+      window.location.href='/';
+
+    }
     
   };
 
+
   return (
     <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar
+      {/* <CssBaseline /> */}
+      {/* <AppBar
         position="fixed"
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
-      >
-        <Toolbar>
+      > */}
+        {/* <Toolbar>
           <Typography variant="h6" noWrap component="div">
             Welcome Mr.{userData.displayName}
           </Typography>
-        </Toolbar>
-      </AppBar>
+        </Toolbar> */}
+      {/* </AppBar> */}
       <Drawer
         sx={{
           width: drawerWidth,
@@ -74,10 +81,22 @@ const userDetails = async () => {
         variant="permanent"
         anchor="left"
       >
-        <Toolbar />
+        {/* <Toolbar /> */}
+        <div style={{ display: "flex", alignItems: "center" }}>
+      {/* Round profile image */}
+      <Avatar src={userData.photoURL} alt="Profile Image" sx={{ width: 60, height: 60, margin:'10px' }} />
+
+      {/* Name in two lines */}
+      <div style={{ marginLeft: 16 }}>
+        <Typography variant="h6" noWrap component="div" gutterBottom>
+          {userData.displayName}
+        </Typography>
+        
+      </div>
+    </div>
         <Divider />
         <List>
-          {['MyVideos', 'AllCourses', 'MyCart', 'Drafts'].map((text, index) => (
+          {['MyVideos', 'AllCourses', 'MyCart', 'Drafts', 'Logout'].map((text, index) => (
             <ListItem
               key={text}
               disablePadding

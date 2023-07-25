@@ -1,11 +1,11 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../images/Logo.png";
 import Register from "../Registration/Register";
+import OptionLogo from "../../images/Option_logo.png";
+
 
 const pages = [
   "AllCourses",
@@ -21,7 +21,8 @@ function Navbar() {
   const navigate = useNavigate();
 
   const appBarStyle = {
-    backgroundColor: "#5699E3", // Replace with your desired color
+    // backgroundColor: "rgba(196, 82, 3, 0.7)", // Hex #c45203 with 70% transparency
+    background:'none'    
   };
 
   const handleRegisterClick = () => {
@@ -30,11 +31,11 @@ function Navbar() {
   const logoClick=()=>{
     navigate('/')
   }
+  const lendingLogoClick=()=>{
+    navigate('/lending')
+  }
   const handleNavMenuClick = (value) => {
     switch (value) {
-      // case "Home":
-      //      navigate('/');
-      //   break;
       case "AllCourses":
         navigate("/allcourses");
         break;
@@ -57,37 +58,35 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static" style={appBarStyle}>
-      {/* <Container maxWidth="xl"> */}
-        <Toolbar disableGutters>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <img src={Logo} style={{ width: "auto", height: "80px", marginLeft:'20px' }} alt="Logo"  onClick={logoClick}/>
-          </Box>
+<div style={{display:'flex', width:'90vw'}}>
+    <img src={Logo} style={{ width: "26rem", height: "13rem", }} alt="Logo"  onClick={logoClick}/>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+        <Toolbar disableGutters>
+
+          <div style={{'dispplay':"inline-block","backgroundColor": "rgba(196, 82, 3, 0.7)", "borderRadius":"1rem", width:'65vw', display:'flex', justifyContent:'space-evenly'
+}}>
             {pages.map((page, index) => (
               <Button
                 key={page}
                 onClick={() => { handleNavMenuClick(page) }}
                 sx={{
-                  fontSize: "20px",
+                  fontSize: "2.2rem",
                   fontFamily: "monospace",
                   fontWeight: 500,
-                  // letterSpacing: ".3rem",
-                  color: "inherit",
-                  textDecoration: "none",
-                  marginLeft: index === 0 ? "150px" : "100px", // Adjust the margin here
+                  color: "black",
                 }}
               >
                 {page}
               </Button>
+              
             ))}
-          </Box>
+          {/* </Box> */}
+          </div>
+        </Toolbar>    
+        <Register open={openRegister} setOpen={setOpenRegister} />
+        <img src={OptionLogo} style={{ width: "26rem", height: "13rem", }} alt="Logo"  onClick={lendingLogoClick}/>
 
-        </Toolbar>
-      {/* </Container> */}
-      <Register open={openRegister} setOpen={setOpenRegister} />
-    </AppBar>
+        </div>
   );
 }
 export default Navbar;

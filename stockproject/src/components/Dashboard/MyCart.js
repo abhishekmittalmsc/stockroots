@@ -115,7 +115,7 @@ const MyCart = ({ course, onRemoveItem }) => {
       ) : (
         <div>Your cart is empty.</div>
       )}
-      <Payment/>
+      <Payment amount={totalAmount}/>
     </div>
   );
 };

@@ -29,8 +29,9 @@ const useStyles = makeStyles((theme) => ({
   },
   image: {
     height: "100%",
-    width: `${100 / images.length}%`, // Updated width calculation
-    backgroundSize: "contain", // Updated background-size property
+    width: "100%",
+    // width: `${100 / images.length}%`, // Updated width calculation
+    // backgroundSize: "contain", // Updated background-size property
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center center",
     [theme.breakpoints.down("sm")]: {

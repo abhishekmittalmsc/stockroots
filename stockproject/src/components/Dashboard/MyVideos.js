@@ -55,7 +55,6 @@ const MyCard = () => {
 
   return (
     <>
-    <h1>My Courses:</h1>
       {
         myCourses && myCourses.map((courses)=>{
           return(
